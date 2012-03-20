@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: s56bouya
-Donate link: http://www.imamura.biz/
+Donate link: 
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
 Tested up to: 3.3.1
