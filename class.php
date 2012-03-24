@@ -55,7 +55,8 @@ if ( !class_exists('NewpostCatch') ) {
 			echo $before_widget;
 			
 			if ( $title ) echo $before_title . $title . $after_title;
-				query_posts($query_string . "&showposts=" . $number );
+				query_posts($query_string . "&showposts=" . $number . "&ignore_sticky_posts=1" );
+
 ?>
 <ul id="npcatch" >
 <?php if( have_posts() ) : ?>
