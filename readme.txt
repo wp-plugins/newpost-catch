@@ -4,7 +4,7 @@ Donate link:
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 Thumbnails in new articles setting widget.
 
@@ -33,9 +33,13 @@ I think that the more you do not even question...
 
 == Changelog ==
 
+= 1.0.1 =
+* Has been updated so that it does not include the "Stick this post to the front page".
+* A change since the previous version.
+
 = 1.0.0 =
 * First stable version.
 
 == Upgrade Notice ==
 
-Now plans to update various
+Nothing in particular.
