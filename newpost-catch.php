@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Newpost Catch
-Plugin URI: http://www.imamura.biz/blog/
+Plugin URI: http://www.imamura.biz/blog/cms/wordpress/3614/
 Description: Thumbnails in new articles setting widget.
 Version: 1.0.1
 Author: Tetsuya Imamura
