@@ -53,7 +53,7 @@ I think how to directly edit the "style.css" file and how would you or declined.
 
 If you wish to apply a CSS style on its own,
 
-In the "theme directory / css /" as you please create a "newpost-catch.css".
+In the "/wp-content/themes/theme directory/css/" as you please create a "newpost-catch.css".
 
 Please the name of the file to create and "newpost-catch.css". The other is the file name, does not apply.
 
