@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.2";
+		var $version = "1.0.3";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -43,7 +43,7 @@ if ( !class_exists('NewpostCatch') ) {
 			echo "\n"."<!-- Newpost Catch ver".$this->version." -->"."\n".'<link rel="stylesheet" href="' . $css_path . '" type="text/css" media="screen" />'."\n"."<!-- End Newpost Catch ver".$this->version." -->"."\n";	
 		}
 		
-		/**Å• create widget Å•**/
+		/**‚ñº create widget ‚ñº**/
 		function widget($args, $instance) {
 			extract( $args );
 			
@@ -83,7 +83,7 @@ if ( !class_exists('NewpostCatch') ) {
 <?php
 			echo $after_widget;
 		}
-		/**Å£ create widget Å£**/
+		/**‚ñ≤ create widget ‚ñ≤**/
 
 		/** @see WP_Widget::update **/
 		// updates each widget instance when user clicks the "save" button
