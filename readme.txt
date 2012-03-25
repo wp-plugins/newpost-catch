@@ -23,7 +23,39 @@ Thumbnails in new articles setting widget.
 
 == Frequently Asked Questions ==
 
-I think that the more you do not even question...
+-- Apply your own css style --
+
+(Located in the plug-in directory) CSS Å® style.css file the default
+
+(Please create a directory under the theme/css/) CSS file for customization Å® newpost-catch.css
+
+
+Priority
+
+newpost-catch.css > style.css
+
+Will be applied at.
+
+
+style.css are marked with the movement when the mouse is moved over in the webkit of css3.
+
+(You can check the behavior of firefox-enabled browser webkit, such as google Chrome)
+
+With regard to CSS will either use the default CSS,
+
+I used the CSS that you created in your own, please change to your liking.
+
+
+Å¶ With the version up of the plug-in, so will be overwritten "style.css" file each time,
+
+I think how to directly edit the "style.css" file and how would you or declined.
+
+If you wish to apply a CSS style on its own,
+
+In the "theme directory / css /" as you please create a "newpost-catch.css".
+
+Please the name of the file to create and "newpost-catch.css". The other is the file name, does not apply.
+
 
 == Screenshots ==
 
