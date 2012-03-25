@@ -25,9 +25,9 @@ Thumbnails in new articles setting widget.
 
 -- Apply your own css style --
 
-(Located in the plug-in directory) CSS Å® style.css file the default
+(Located in the plug-in directory) CSS „Äåstyle.css„Äç file the default
 
-(Please create a directory under the theme/css/) CSS file for customization Å® newpost-catch.css
+(Please create a directory under the theme/css/) CSS file for customization „Äånewpost-catch.css„Äç
 
 
 Priority
@@ -46,7 +46,9 @@ With regard to CSS will either use the default CSS,
 I used the CSS that you created in your own, please change to your liking.
 
 
-Å¶ With the version up of the plug-in, so will be overwritten "style.css" file each time,
+*** notice ***
+
+ With the version up of the plug-in, so will be overwritten "style.css" file each time,
 
 I think how to directly edit the "style.css" file and how would you or declined.
 
