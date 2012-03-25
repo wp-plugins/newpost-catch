@@ -27,7 +27,7 @@ Thumbnails in new articles setting widget.
 
 (Located in the plug-in directory) CSS "style.css" file the default
 
-(Please create a directory under the "themes/theme directory/css/") CSS file for customization "newpost-catch.css"
+(Please create a directory under the "/wp-content/themes/theme directory/css/") CSS file for customization "newpost-catch.css"
 
 Priority
 
