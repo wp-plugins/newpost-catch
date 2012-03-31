@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.3";
+		var $version = "1.0.4";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -37,7 +37,7 @@ if ( !class_exists('NewpostCatch') ) {
 			load_plugin_textdomain ( 'newpost-catch', false, basename( rtrim(dirname(__FILE__), '/') ) . '/languages' );
 		}
 		
-		/** insert header stylesheet **/
+		/** plugin insert header stylesheet **/
 		function NewpostCatch_print_stylesheet() {
 			$css_path = ( @file_exists(TEMPLATEPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri().'/css/newpost-catch.css' : plugin_dir_url( __FILE__ ).'style.css';
 			echo "\n"."<!-- Newpost Catch ver".$this->version." -->"."\n".'<link rel="stylesheet" href="' . $css_path . '" type="text/css" media="screen" />'."\n"."<!-- End Newpost Catch ver".$this->version." -->"."\n";	
@@ -51,6 +51,21 @@ if ( !class_exists('NewpostCatch') ) {
 			$width = apply_filters('NewpostCatch_widget_width', $instance['width']);
 			$height = apply_filters('NewpostCatch_widget_height', $instance['height']);
 			$number = apply_filters('NewpostCatch_widget_number', $instance['number']);
+
+			function no_thumb_image() {
+				$set_img = '';
+				ob_start();
+				ob_end_clean();
+				$output = preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
+				$set_img = $matches[1][0];
+
+				/* if not exist images */
+				if( empty( $set_img ) )
+				{
+				$set_img = WP_PLUGIN_URL . '/newpost-catch' . '/no_thumb.png';
+				}
+				return $set_img;
+			}
 			
 			echo $before_widget;
 			
@@ -63,11 +78,17 @@ if ( !class_exists('NewpostCatch') ) {
 <?php while( have_posts() ) : the_post(); ?>
 <li>
 <span class="thumb"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-<?php if( has_post_thumbnail() ) : ?>
-<?php \n . the_post_thumbnail( array( $width , $height ),array( 'alt' => $title_attr , 'title' => $title_attr )); ?>
-<?php else : ?>
-<img src="<?php echo $this->default_thumbnail ?>" width="<?php echo $width ?>" height="<?php echo $height ?>" >
-<?php endif; ?>
+<?php if( has_post_thumbnail() ) { ?>
+<?php //\n . the_post_thumbnail( array( $width , $height ),array( 'alt' => $title_attr , 'title' => $title_attr )); ?>
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id);
+$thumb_url = $thumb_url[0];
+?>
+<img src="<?php echo $thumb_url; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>"  />
+<?php } else { ?>
+<img src="<?php echo no_thumb_image() ?>"  width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" />
+<?php } ?>
 </a></span>
 <span class="title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?>
 <?php if ( $instance['date']['active'] ) { ?>
