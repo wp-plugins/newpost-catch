@@ -3,7 +3,7 @@ Contributors: s56bouya
 Donate link: http://www.imamura.biz/blog/
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
-Tested up to: 3.3.1
+Tested up to: 3.3.2
 Stable tag: 1.0.5
 
 Thumbnails in new articles setting widget.
@@ -34,11 +34,6 @@ Priority
 newpost-catch.css > style.css
 
 Will be applied at.
-
-
-style.css are marked with the movement when the mouse is moved over in the webkit of css3.
-
-(You can check the behavior of firefox-enabled browser webkit, such as google Chrome)
 
 With regard to CSS will either use the default CSS,
 
