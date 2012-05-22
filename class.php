@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.4";
+		var $version = "1.0.5";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -77,7 +77,7 @@ if ( !class_exists('NewpostCatch') ) {
 <?php if( have_posts() ) : ?>
 <?php while( have_posts() ) : the_post(); ?>
 <li>
-<span class="thumb"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 <?php if( has_post_thumbnail() ) { ?>
 <?php //\n . the_post_thumbnail( array( $width , $height ),array( 'alt' => $title_attr , 'title' => $title_attr )); ?>
 <?php
@@ -89,7 +89,7 @@ $thumb_url = $thumb_url[0];
 <?php } else { ?>
 <img src="<?php echo no_thumb_image() ?>"  width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" />
 <?php } ?>
-</a></span>
+</a>
 <span class="title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?>
 <?php if ( $instance['date']['active'] ) { ?>
 <span class="date"><?php the_time('[Y/m/d]' , '' , '' ); ?></span>
@@ -137,14 +137,14 @@ $thumb_url = $thumb_url[0];
 			<p>
 			<?php _e('Thumbnail Size' , 'newpost-catch'); ?><br />
 			<label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Width:' , 'newpost-catch'); ?>
-			<input id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="number" style="width:30px" value="<?php echo $width; ?>" /> px</label>
+			<input id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="text" style="width:30px" value="<?php echo $width; ?>" /> px</label>
 			<br />
 			<label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Height:' , 'newpost-catch'); ?>
-			<input id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="number" style="width:30px;" value="<?php echo $height; ?>" /> px</label>
+			<input id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="text" style="width:30px;" value="<?php echo $height; ?>" /> px</label>
 			</p>
 			<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Showposts:' , 'newpost-catch'); ?>
-			<input style="width:30px;" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="number" value="<?php echo $number; ?>" /></label> <?php _e('Posts', 'newpost-catch'); ?>
+			<input style="width:30px;" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" /></label> <?php _e('Posts', 'newpost-catch'); ?>
 			</p>
 			<p>
 	                <input type="checkbox" class="checkbox" <?php echo ($instance['date']['active']) ? 'checked="checked"' : ''; ?> id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" /> <label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e('Display date', 'newpost-catch'); ?></label>
