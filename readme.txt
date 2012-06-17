@@ -3,7 +3,7 @@ Contributors: s56bouya
 Donate link: http://www.imamura.biz/blog/
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
-Tested up to: 3.3.2
+Tested up to: 3.4
 Stable tag: 1.0.5
 
 Thumbnails in new articles setting widget.
