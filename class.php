@@ -96,7 +96,7 @@ $thumb_url = $thumb_url[0];
 <?php } ?>
 </a></span>
 </li>
-<?php endwhile; ?>
+<?php endwhile; wp_reset_query(); ?>
 <?php else : ?>
 <p>no post</p>
 <?php endif; ?>
