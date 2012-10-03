@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.5";
+		var $version = "1.0.6";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -96,10 +96,10 @@ $thumb_url = $thumb_url[0];
 <?php } ?>
 </a></span>
 </li>
-<?php endwhile; wp_reset_query(); ?>
+<?php endwhile; ?>
 <?php else : ?>
 <p>no post</p>
-<?php endif; ?>
+<?php endif; wp_reset_query(); ?>
 </ul>
 <?php
 			echo $after_widget;

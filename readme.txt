@@ -4,7 +4,7 @@ Donate link: http://www.imamura.biz/blog/
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
 Tested up to: 3.4.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 Thumbnails in new articles setting widget.
 
@@ -60,6 +60,9 @@ Please the name of the file to create and "newpost-catch.css". The other is the 
 3. Is simple to add the side bar, to set the size of the thumbnail, posts, post date
 
 == Changelog ==
+
+= 1.0.6 =
+* Bugfix.
 
 = 1.0.5 =
 * Has been deleted in the action, webkit css3.
