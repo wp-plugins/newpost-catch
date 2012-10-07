@@ -39,3 +39,7 @@ msgstr ""
 msgid "Display date"
 msgstr ""
 
+#: newpost-catch/class.php:152
+msgid "Are you satisfied?"
+msgstr ""
+

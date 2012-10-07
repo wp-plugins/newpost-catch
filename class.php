@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.6";
+		var $version = "1.0.7";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -77,7 +77,7 @@ if ( !class_exists('NewpostCatch') ) {
 <?php if( have_posts() ) : ?>
 <?php while( have_posts() ) : the_post(); ?>
 <li>
-<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+<a href="<?php esc_attr( the_permalink() ); ?>" title="<?php esc_attr( the_title() ); ?>" >
 <?php if( has_post_thumbnail() ) { ?>
 <?php //\n . the_post_thumbnail( array( $width , $height ),array( 'alt' => $title_attr , 'title' => $title_attr )); ?>
 <?php
@@ -85,14 +85,14 @@ $thumb_id = get_post_thumbnail_id();
 $thumb_url = wp_get_attachment_image_src($thumb_id);
 $thumb_url = $thumb_url[0];
 ?>
-<img src="<?php echo $thumb_url; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>"  />
+<img src="<?php echo esc_attr( $thumb_url ); ?>" width="<?php echo esc_attr( $width ); ?>" height="<?php echo esc_attr( $height ); ?>" alt="<?php esc_attr( the_title() ); ?>" title="<?php esc_attr( the_title() ); ?>"  />
 <?php } else { ?>
-<img src="<?php echo no_thumb_image() ?>"  width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" />
+<img src="<?php echo esc_attr( no_thumb_image() ); ?>"  width="<?php echo esc_attr( $width ); ?>" height="<?php echo esc_attr( $height ); ?>" alt="<?php esc_attr( the_title() ); ?>" title="<?php esc_attr( the_title() ); ?>" />
 <?php } ?>
 </a>
-<span class="title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?>
+<span class="title"><a href="<?php esc_attr( the_permalink() ); ?>" title="<?php esc_attr( the_title() ); ?>"><?php esc_html( the_title() ); ?>
 <?php if ( $instance['date']['active'] ) { ?>
-<span class="date"><?php the_time('[Y/m/d]' , '' , '' ); ?></span>
+<span class="date"><?php esc_html( the_time('[Y/m/d]' , '' , '' ) ); ?></span>
 <?php } ?>
 </a></span>
 </li>
@@ -118,7 +118,6 @@ $thumb_url = $thumb_url[0];
 			$instance['number'] = is_numeric($new_instance['number']) ? $new_instance['number'] : 5;
 			$instance['date']['active'] = $new_instance['date'];
 			
-			//return $instance;
 			return $instance;
 		}
 		 
@@ -131,23 +130,27 @@ $thumb_url = $thumb_url[0];
 			$defaults = array( 'date' => array( 'active' => false ) );
 ?>
 			<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:' , 'newpost-catch'); ?>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:' , 'newpost-catch'); ?></label>
 			<input id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" class="widefat" value="<?php echo $title; ?>" /></label>
 			</p>
 			<p>
 			<?php _e('Thumbnail Size' , 'newpost-catch'); ?><br />
-			<label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Width:' , 'newpost-catch'); ?>
+			<label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Width:' , 'newpost-catch'); ?></label>
 			<input id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="text" style="width:30px" value="<?php echo $width; ?>" /> px</label>
 			<br />
-			<label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Height:' , 'newpost-catch'); ?>
+			<label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Height:' , 'newpost-catch'); ?></label>
 			<input id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="text" style="width:30px;" value="<?php echo $height; ?>" /> px</label>
 			</p>
 			<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Showposts:' , 'newpost-catch'); ?>
+			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Showposts:' , 'newpost-catch'); ?></label>
 			<input style="width:30px;" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" /></label> <?php _e('Posts', 'newpost-catch'); ?>
 			</p>
 			<p>
 	                <input type="checkbox" class="checkbox" <?php echo ($instance['date']['active']) ? 'checked="checked"' : ''; ?> id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" /> <label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e('Display date', 'newpost-catch'); ?></label>
+			</p>
+			<p>
+			<label><?php _e('Are you satisfied?' , 'newpost-catch'); ?></label>
+				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fimamura.tetsuya&amp;width=226&amp;height=190&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23ccc&amp;stream=false&amp;header=true&amp;appId=352152184854708" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:226px; height:190px;" allowTransparency="true"></iframe>
 			</p>
 <?php
 		}
