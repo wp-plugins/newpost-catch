@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.0.7";
+		var $version = "1.0.8";
 		var $pluginDir = "";
 		
 		/*** plugin structure ***/
@@ -70,7 +70,7 @@ if ( !class_exists('NewpostCatch') ) {
 			echo $before_widget;
 			
 			if ( $title ) echo $before_title . $title . $after_title;
-				query_posts($query_string . "&showposts=" . $number . "&ignore_sticky_posts=1" );
+				query_posts("showposts=" . $number . "&ignore_sticky_posts=1" );
 
 ?>
 <ul id="npcatch" >
