@@ -1,9 +1,9 @@
-# Copyright 2012 Newpost Catch
+# Copyright 2012-2013 Newpost Catch
 msgid ""
 msgstr ""
 "Project-Id-Version: Newpost Catch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-19 +900\n"
+"POT-Creation-Date: 2012-05-11 +900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tetsuya Imamura <wpdev@imamura.biz>\n"
 "Language-Team: Tetsuya Imamura <wpdev@imamura.biz>\n"
@@ -11,35 +11,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: newpost-catch/class.php:112
-msgid "Title:"
+msgid "LatestPost(s)"
 msgstr ""
 
-#: newpost-catch/class.php:116
+msgid "Title"
+msgstr ""
+
 msgid "Thumbnail Size"
 msgstr ""
 
-#: newpost-catch/class.php:117
-msgid "Width:"
+msgid "Width"
 msgstr ""
 
-#: newpost-catch/class.php:120
-msgid "Height:"
+msgid "Height"
 msgstr ""
 
-#: newpost-catch/class.php:124
-msgid "Showposts:"
+msgid "Show post(s)"
 msgstr ""
 
-#: newpost-catch/class.php:125
-msgid "Posts"
+msgid "Post(s)"
 msgstr ""
 
-#: newpost-catch/class.php:128
 msgid "Display date"
 msgstr ""
 
-#: newpost-catch/class.php:152
-msgid "Are you satisfied?"
+msgid "Display sticky post"
+msgstr ""
+
+msgid "Use default css"
+msgstr ""
+
+msgid "Display category(ies)"
+msgstr ""
+
+msgid "Check the category ID"
+msgstr ""
+
+msgid "Contact/Follow"
 msgstr ""
 

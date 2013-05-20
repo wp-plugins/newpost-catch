@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: s56bouya
-Donate link: http://www.imamura.biz/blog/
+Donate link: http://www.imamura.biz/blog/newpost-catch
 Tags: widget, plugin, posts, sidebar, image, images
 Requires at least: 3.3.1
-Tested up to: 3.5
-Stable tag: 1.0.9
+Tested up to: 3.5.1
+Stable tag: 1.1.0
 
 Thumbnails in new articles setting widget.
 
@@ -60,6 +60,10 @@ Please the name of the file to create and "newpost-catch.css". The other is the 
 3. Is simple to add the side bar, to set the size of the thumbnail, posts, post date
 
 == Changelog ==
+
+= 1.1.0 =
+* Compatibility check with WP 3.5.1.
+* Add option「Display date」「Display sticky post」「Use default css」「Display category(ies)」.
 
 = 1.0.9 =
 * Compatibility check with WP 3.5.
