@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.1.2";
+		var $version = "1.1.3";
 		var $pluginDir = "";
 
 		/*** plugin structure ***/
@@ -43,9 +43,9 @@ if ( !class_exists('NewpostCatch') ) {
 				$options = array_filter( get_option( 'widget_newpostcatch' ) );
 				unset( $options['_multiwidget'] );
 				foreach( $options as $key => $val ) {
-					$options = $options[$key];
+					$options[$key] = $val['css']['active'];
 				}
-				if( $options['css']['active'] ){
+				if( in_array('on' , $options) ){
 					$css_path = plugin_dir_url( __FILE__ ) . 'style.css';
 				} else {
 					$css_path = ( @file_exists(TEMPLATEPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri().'/css/newpost-catch.css' : "" ;
