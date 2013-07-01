@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** plugin variables ***/
-		var $version = "1.1.3";
+		var $version = "1.1.4";
 		var $pluginDir = "";
 
 		/*** plugin structure ***/
@@ -77,10 +77,10 @@ if ( !class_exists('NewpostCatch') ) {
 					ob_start();
 					ob_end_clean();
 					$output = preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
-					$set_img = $output[1][0];
-
-					/* if not exist images */
-					if( empty( $set_img ) ){
+					
+					if( isset( $matches[1][0]) ){
+						$set_img = $matches[1][0];
+					} else {
 						$set_img = WP_PLUGIN_URL . '/newpost-catch' . '/no_thumb.png';
 					}
 					return $set_img;
