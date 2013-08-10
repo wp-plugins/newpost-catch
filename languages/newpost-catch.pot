@@ -1,0 +1,52 @@
+# Copyright 2012-2013 Newpost Catch
+msgid ""
+msgstr ""
+"Project-Id-Version: Newpost Catch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-11 +900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Tetsuya Imamura <wpdev@imamura.biz>\n"
+"Language-Team: Tetsuya Imamura <wpdev@imamura.biz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "LatestPost(s)"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Thumbnail Size"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Show post(s)"
+msgstr ""
+
+msgid "Post(s)"
+msgstr ""
+
+msgid "Display date"
+msgstr ""
+
+msgid "Display sticky post"
+msgstr ""
+
+msgid "Use default css"
+msgstr ""
+
+msgid "Display category(ies)"
+msgstr ""
+
+msgid "Check the category ID"
+msgstr ""
+
+msgid "Contact/Follow"
+msgstr ""
+
