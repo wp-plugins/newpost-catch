@@ -4,11 +4,11 @@
  **/
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
-		/*** plugin variables ***/
-		var $version = "1.1.5";
+		/*** variables ***/
+		var $version = "1.1.6";
 		var $pluginDir = "";
 
-		/*** plugin structure ***/
+		/*** structure ***/
 		function NewpostCatch() {
 			/** widget settings **/
 			$widget_ops = array( 'description' => 'Thumbnails in new articles.' );
@@ -76,8 +76,8 @@ if ( !class_exists('NewpostCatch') ) {
 				function no_thumb_image() {
 					ob_start();
 					ob_end_clean();
-					$output = preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
-					
+					preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
+
 					if( isset( $matches[1][0]) ){
 						$set_img = $matches[1][0];
 					} else {
@@ -90,19 +90,8 @@ if ( !class_exists('NewpostCatch') ) {
 			echo $before_widget;
 
 			if ( $title ) echo $before_title . $title . $after_title;
-/*
-				query_posts("showposts=" . $number .
-					    "&ignore_sticky_posts=" . $ignore .
-					    "&cat=" . $cat
-					     );
-*/
 				$sticky = get_option( 'sticky_posts' );
 				if( $ignore == !false ){
-/*
-					if( ($number - count($sticky)) > 0 ){
-						$number = ($number - count($sticky));
-					}
-*/
 					$npc_query = new WP_Query( array(
 						'cat' => $cat,
 						'posts_per_page' => $number,
@@ -127,7 +116,7 @@ if ( !class_exists('NewpostCatch') ) {
 <li>
 <a href="<?php echo esc_html( get_permalink() ); ?>" title="<?php esc_attr( the_title() ); ?>" >
 <?php if( has_post_thumbnail() ) { ?>
-<?php /*\n . the_post_thumbnail( array( $width , $height ),array( 'alt' => $title_attr , 'title' => $title_attr ));*/ ?>
+<?php /*echo the_post_thumbnail( array( $width , $height ),array( 'alt' => the_title() , 'title' => the_title() ));*/ ?>
 <?php
 $thumb_id = get_post_thumbnail_id();
 $thumb_url = wp_get_attachment_image_src($thumb_id);
@@ -149,6 +138,7 @@ $thumb_url = $thumb_url[0];
 <p>no post</p>
 <?php endif; wp_reset_postdata(); ?>
 </ul>
+
 <?php
 			echo $after_widget;
 		}
@@ -165,11 +155,11 @@ $thumb_url = $thumb_url[0];
 			$instance['height']			= is_numeric($new_instance['height']) ? $new_instance['height'] : 10;
 			$instance['number']			= is_numeric($new_instance['number']) ? $new_instance['number'] : 5;
 
-if( preg_match("/^[0-9]|,|-/", $new_instance['cat']) ){
-			$instance['cat'] 			= $new_instance['cat'];
-} else {
-			$instance['cat'] 			= "";
-}
+			if( preg_match("/^[0-9]|,|-/", $new_instance['cat']) ){
+				$instance['cat'] 		= $new_instance['cat'];
+			} else {
+				$instance['cat'] 		= "";
+			}
 
 			$instance['date']['active']		= $new_instance['date'];
 			$instance['ignore_check']['active']	= $new_instance['ignore_check']['active'];
@@ -228,12 +218,108 @@ if( preg_match("/^[0-9]|,|-/", $new_instance['cat']) ){
 			<span><a href="<?php echo get_bloginfo('url') . '/wp-admin/edit-tags.php?taxonomy=category'; ?>"><?php _e('Check the category ID' , 'newpost-catch'); ?></a></span>
 			</p>
 			<p>
-			<label><?php _e('Contact/Follow' , 'newpost-catch'); ?></label>
-				<a href="https://twitter.com/s56bouya" target="_blank">Twitter</a>
-				<a href="http://www.facebook.com/imamura.tetsuya" target="_blank">Facebook</a>
-				<a href="https://plus.google.com/b/103773364658434530979/" target="_blank">Google+</a>
+				<?php _e('Use shortcode' , 'newpost-catch'); ?>
+				<?php _e('Can use the shortcode in a textwidget and theme files.' , 'newpost-catch'); ?> <a href="http://wordpress.org/plugins/newpost-catch/faq/" target="_blank">FAQ</a>
+			</p>
+			<p>
+				<?php _e('Contact/Follow' , 'newpost-catch'); ?>
+				<a href="https://twitter.com/NewpostCatch" target="_blank">Twitter</a>
+				<a href="https://www.facebook.com/NewpostCatch" target="_blank">Facebook</a>
 			</p>
 <?php
+		}
+	}
+}
+
+if ( !class_exists('NewpostCatch_SC') ) {
+	class NewpostCatch_SC {
+		function __construct(){
+			add_shortcode('npc', array(&$this, 'npc_sc'));
+
+			function no_thumb_image() {
+				ob_start();
+				ob_end_clean();
+				preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
+				if( isset( $matches[1][0]) ){
+					$set_img = $matches[1][0];
+				} else {
+					$set_img = WP_PLUGIN_URL . '/newpost-catch' . '/no_thumb.png';
+				}
+				return $set_img;
+			}
+		}
+		
+		function npc_sc($atts) {
+
+			/** default value **/
+			extract( shortcode_atts( array(
+				'id' => "npcatch",
+				'cat' => NULL,
+				'width' => 10,
+				'height' => 10,
+				'posts_per_page' => 5,
+				'sticky' => 0,
+				'offset' => 0,
+				'orderby' => "date",
+				'order' => "DESC",
+				'date' => 0,
+				'dynamic' => 0,
+			), $atts ) );
+
+			if( is_array($atts) && array_key_exists('dynamic',$atts) && $atts['dynamic'] == 1 && get_post_type() == "post" && is_single() ){
+				$cat = get_the_category();
+				$cat = $cat[0];
+				$cat = $cat->cat_ID;
+			} else {
+				if( is_null($cat) ){
+					$cat = NULL;
+				}
+			}
+
+			if( is_array($atts) && array_key_exists('sticky',$atts) && $atts['sticky'] == 1 ){
+				$sticky = 0;
+			} else {
+				$sticky = 1;
+			}
+
+			/** query **/
+			$npc_sc_query = new WP_Query( array(
+				'cat' => $cat,
+				'offset' => $offset,
+				'posts_per_page' => $posts_per_page,
+				'ignore_sticky_posts' => $sticky,
+				'orderby' => $orderby,
+				'order' => $order
+			));
+
+			$html = "";
+			if( $npc_sc_query->have_posts() ) :
+				$html .= "<ul id=\"$id\">\n";
+				while( $npc_sc_query->have_posts() ) :
+					$npc_sc_query->the_post();
+					
+					$html .= "<li>";
+					$html .= "<a href=\"" . esc_html( get_permalink() ) . "\" title=\"" . esc_attr( get_the_title() ) . "\" >\n";
+					$thumb_url = "";
+				if( has_post_thumbnail() ) {
+					$thumb_id = get_post_thumbnail_id();
+					$thumb_url = wp_get_attachment_image_src($thumb_id);
+					$thumb_url = $thumb_url[0];
+					$html .= "<img src=\"" . esc_attr( $thumb_url ) . "\" width=\"" . esc_attr( $width ) . "\" height=\"" . esc_attr( $height ) . "\" alt=\"" . esc_attr( get_the_title() ) . "\" title=\"" . esc_attr( get_the_title() ) . "\" /></a>\n";
+				} else {
+					$html .= "<img src=\"" . esc_attr( no_thumb_image() ) . "\" width=\"" . esc_attr( $width ) . "\" height=\"" . esc_attr( $height ) . "\" alt=\"" . esc_attr( get_the_title() ) . "\" title=\"" . esc_attr( get_the_title() ) . "\" /></a>\n";
+				}
+					$html .= "<span class=\"title\"><a href=\"" . esc_html( get_permalink() ) . "\" title=\"" . esc_attr( get_the_title() ) . "\" >" . esc_html( get_the_title() );
+				if ( $date == true ) {
+					$html .= "<span class=\"date\">" . esc_html( get_the_time( get_option('date_format') ) ) . "</span>\n";
+				}
+					$html .= "</a></span></li>\n";
+				endwhile;
+				$html .= "</ul>";
+			endif;
+			wp_reset_postdata();
+			
+			return $html;
 		}
 	}
 }

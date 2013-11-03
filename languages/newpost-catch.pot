@@ -47,6 +47,11 @@ msgstr ""
 msgid "Check the category ID"
 msgstr ""
 
-msgid "Contact/Follow"
+msgid "Use shortcode"
 msgstr ""
 
+msgid "Can use the shortcode in a textwidget and theme files."
+msgstr ""
+
+msgid "Contact/Follow"
+msgstr ""

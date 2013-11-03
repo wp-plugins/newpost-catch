@@ -51,5 +51,13 @@ msgstr ""
 msgid "Check the category ID"
 msgstr "カテゴリのIDを確認"
 
+msgid "Use shortcode"
+msgstr "【新機能】ショートコードが使えるようになりました。"
+
+msgid "Can use the shortcode in a textwidget and theme files."
+msgstr "テーマファイル,投稿本文中など 様々な箇所に表示できます。"
+
 msgid "Contact/Follow"
-msgstr "その辺に居ますので、どこかで見かけましたらよろしくです。"
+msgstr ""
+"【専用アカウント作りました】プラグインに関する新機能追加や最新情報などのお知"
+"らせを配信します。是非ともフォローください。"
