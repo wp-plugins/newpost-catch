@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.1.8";
+		var $version = "1.1.9";
 		var $pluginDir = "";
 
 		/*** structure ***/
