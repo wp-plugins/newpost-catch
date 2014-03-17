@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.1.9";
+		var $version = "1.2.0";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -54,9 +54,6 @@ if ( !class_exists('NewpostCatch') ) {
 					echo "\n"."<!-- Newpost Catch ver".$this->version." -->"."\n".'<link rel="stylesheet" href="' . $css_path . '" type="text/css" media="screen" />'."\n"."<!-- End Newpost Catch ver".$this->version." -->"."\n";
 				}
 			}
-
-//			$css_path = ( @file_exists(TEMPLATEPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri().'/css/newpost-catch.css' : plugin_dir_url( __FILE__ ).'style.css';
-//			echo "\n"."<!-- Newpost Catch ver".$this->version." -->"."\n".'<link rel="stylesheet" href="' . $css_path . '" type="text/css" media="screen" />'."\n"."<!-- End Newpost Catch ver".$this->version." -->"."\n";
 		}
 
 		/**▼ create widget ▼**/
@@ -78,7 +75,7 @@ if ( !class_exists('NewpostCatch') ) {
 					ob_end_clean();
 					preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
 
-					if( isset( $matches[1][0]) ){
+					if( isset($matches[1][0]) && !is_wp_error($matches[1][0]) ){
 						$set_img = $matches[1][0];
 					} else {
 						$set_img = WP_PLUGIN_URL . '/newpost-catch' . '/no_thumb.png';
@@ -93,6 +90,7 @@ if ( !class_exists('NewpostCatch') ) {
 				$sticky = get_option( 'sticky_posts' );
 				if( $ignore == !false ){
 					$npc_query = new WP_Query( array(
+						'post_type' => 'post',
 						'cat' => $cat,
 						'posts_per_page' => $number,
 						'ignore_sticky_posts' => 0,
@@ -101,6 +99,7 @@ if ( !class_exists('NewpostCatch') ) {
 					));
 				} else {
 					$npc_query = new WP_Query( array(
+						'post_type' => 'post',
 						'cat' => $cat,
 						'posts_per_page' => $number,
 						'post_not_in' => $sticky,
@@ -112,11 +111,11 @@ if ( !class_exists('NewpostCatch') ) {
 ?>
 <ul id="npcatch" >
 <?php if( $npc_query->have_posts() ) : ?>
+<?php $i = 0; ?>
 <?php while( $npc_query->have_posts() ) : $npc_query->the_post(); ?>
 <li>
 <a href="<?php echo esc_html( get_permalink() ); ?>" title="<?php esc_attr( the_title() ); ?>" >
 <?php if( has_post_thumbnail() ) { ?>
-<?php /*echo the_post_thumbnail( array( $width , $height ),array( 'alt' => the_title() , 'title' => the_title() ));*/ ?>
 <?php
 $thumb_id = get_post_thumbnail_id();
 $thumb_url = wp_get_attachment_image_src($thumb_id);
@@ -133,6 +132,7 @@ $thumb_url = $thumb_url[0];
 <?php } ?>
 </a></span>
 </li>
+<?php $i++; ?>
 <?php endwhile; ?>
 <?php else : ?>
 <p>no post</p>
@@ -220,6 +220,9 @@ $thumb_url = $thumb_url[0];
 			<p>
 				<?php _e('Use shortcode' , 'newpost-catch'); ?>
 				<?php _e('Can use the shortcode in a textwidget and theme files.' , 'newpost-catch'); ?> <a href="http://wordpress.org/plugins/newpost-catch/faq/" target="_blank">FAQ</a>
+			</p>
+			<p>
+			<span><a href="<?php echo get_bloginfo('url') . '/wp-admin/options-general.php?page=Newpost-Catch.php'; ?>"><?php _e('Setting Thumbnails' , 'newpost-catch'); ?></a></span>
 			</p>
 			<p>
 				<?php _e('Contact/Follow' , 'newpost-catch'); ?>

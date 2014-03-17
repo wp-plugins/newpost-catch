@@ -55,3 +55,60 @@ msgstr ""
 
 msgid "Contact/Follow"
 msgstr ""
+
+msgid "completed."
+msgstr ""
+
+msgid "Setting Thumbnails"
+msgstr ""
+
+msgid "Eyecatch image batch setting"
+msgstr ""
+
+msgid "I can set the eyecatch image, [the first image] found in the body of the post. (※ image does not exist, invalid image of (dead link) can not be set the URL."
+msgstr ""
+
+msgid "Search the post."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search Result"
+msgstr ""
+
+msgid "Can be edited post in the [Edit] button. Please confirm the image displayed in the text and, whether or not broken links."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Image URL"
+msgstr ""
+
+msgid "Not found."
+msgstr ""
+
+msgid "Image(s) found."
+msgstr ""
+
+msgid "Setting start in the [Generate] button"
+msgstr ""
+
+msgid "Generate"
+msgstr ""
+
+msgid "Not Found."
+msgstr ""
+
+msgid "Thumbnail"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Media Settings"
+msgstr ""
