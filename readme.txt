@@ -4,7 +4,7 @@ Donate link: http://www.imamura.biz/blog/newpost-catch
 Tags: widget, plugin, posts, sidebar, image, images, thumb, thumbnail
 Requires at least: 3.3.1
 Tested up to: 3.8.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 
 Thumbnails in new articles setting widget.
 
@@ -91,6 +91,9 @@ When the post other than, post_type of the current page is the value of the prio
 3. Is simple to add the side bar, to set the size of the thumbnail, posts, post date
 
 == Changelog ==
+
+= 1.2.1 =
+* The translation file modification.
 
 = 1.2.0 =
 * Add Admin Menu「Setting Thumbnails」.
