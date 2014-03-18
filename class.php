@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.2.1";
+		var $version = "1.2.2";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -222,7 +222,7 @@ $thumb_url = $thumb_url[0];
 				<?php _e('Can use the shortcode in a textwidget and theme files.' , 'newpost-catch'); ?> <a href="http://wordpress.org/plugins/newpost-catch/faq/" target="_blank">FAQ</a>
 			</p>
 			<p>
-			<span><a href="<?php echo get_bloginfo('url') . '/wp-admin/options-general.php?page=Newpost-Catch.php'; ?>"><?php _e('Setting Thumbnails' , 'newpost-catch'); ?></a></span>
+			<span><a href="<?php echo get_site_url() . '/wp-admin/options-general.php?page=Newpost-Catch.php'; ?>"><?php _e('Setting Thumbnails' , 'newpost-catch'); ?></a></span>
 			</p>
 			<p>
 				<?php _e('Contact/Follow' , 'newpost-catch'); ?>
