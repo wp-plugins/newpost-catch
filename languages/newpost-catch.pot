@@ -65,6 +65,9 @@ msgstr ""
 msgid "Eyecatch image batch setting"
 msgstr ""
 
+msgid "Post type"
+msgstr ""
+
 msgid "I can set the eyecatch image, [the first image] found in the body of the post. (※ image does not exist, invalid image of (dead link) can not be set the URL."
 msgstr ""
 

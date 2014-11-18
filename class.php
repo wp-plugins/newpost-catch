@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.2.4";
+		var $version = "1.2.5";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -60,13 +60,14 @@ if ( !class_exists('NewpostCatch') ) {
 		function widget($args, $instance) {
 			extract( $args );
 
-			$title	= apply_filters('NewpostCatch_widget_title', $instance['title']);
-			$width	= apply_filters('NewpostCatch_widget_width', $instance['width']);
-			$height = apply_filters('NewpostCatch_widget_height', $instance['height']);
-			$number = apply_filters('NewpostCatch_widget_number', $instance['number']);
-			$ignore = apply_filters('NewpostCatch_widget_ignore', $instance['ignore_check']['active']);
-			$css	= apply_filters('NewpostCatch_widget_css', $instance['css']);
-			$cat	= apply_filters('NewpostCatch_widget_cat', $instance['cat']);
+			$title		= apply_filters('NewpostCatch_widget_title', $instance['title']);
+			$width		= apply_filters('NewpostCatch_widget_width', $instance['width']);
+			$height 	= apply_filters('NewpostCatch_widget_height', $instance['height']);
+			$number 	= apply_filters('NewpostCatch_widget_number', $instance['number']);
+			$ignore 	= apply_filters('NewpostCatch_widget_ignore', $instance['ignore_check']['active']);
+			$css		= apply_filters('NewpostCatch_widget_css', $instance['css']);
+			$cat		= apply_filters('NewpostCatch_widget_cat', $instance['cat']);
+			$post_type	= apply_filters('NewpostCatch_widget_post_type', $instance['post_type']);
 /*			if( $instance['ignore_check']['active'] = !false  ) { $ignore = 1; } else { $ignore = 0; }*/
 
 			if( !function_exists('no_thumb_image') ){
@@ -90,7 +91,7 @@ if ( !class_exists('NewpostCatch') ) {
 				$sticky = get_option( 'sticky_posts' );
 				if( $ignore == !false ){
 					$npc_query = new WP_Query( array(
-						'post_type' => 'post',
+						'post_type' => $post_type,
 						'cat' => $cat,
 						'posts_per_page' => $number,
 						'ignore_sticky_posts' => 0,
@@ -99,7 +100,7 @@ if ( !class_exists('NewpostCatch') ) {
 					));
 				} else {
 					$npc_query = new WP_Query( array(
-						'post_type' => 'post',
+						'post_type' => $post_type,
 						'cat' => $cat,
 						'posts_per_page' => $number,
 						'post_not_in' => $sticky,
@@ -164,6 +165,7 @@ $thumb_url = $thumb_url[0];
 			$instance['date']['active']		= $new_instance['date'];
 			$instance['ignore_check']['active']	= $new_instance['ignore_check']['active'];
 			$instance['css']['active']		= $new_instance['css'];
+			$instance['post_type']			= !empty($new_instance['post_type']) ? $new_instance['post_type'] : 'post';
 
 			update_option('newpost_catch', $instance);
 
@@ -182,7 +184,8 @@ $thumb_url = $thumb_url[0];
 						'date'		=> array( 'active' => false ),
 						'ignore_check'	=> array( 'active' => false ),
 						'css'		=> array( 'active' => true ),
-						'cat'		=> NULL
+						'cat'		=> NULL,
+						'post_type'	=> 'post',
 				    );
 
 			$instance = wp_parse_args( (array) $instance, $defaults );
@@ -194,10 +197,10 @@ $thumb_url = $thumb_url[0];
 			<p>
 			<?php _e('Thumbnail Size' , 'newpost-catch'); ?><br />
 			<label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Width' , 'newpost-catch'); ?></label>
-			<input id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="text" style="width:30px" value="<?php echo esc_attr($instance['width']); ?>" /> px
+			<input id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="text" style="width:50px" value="<?php echo esc_attr($instance['width']); ?>" /> px
 			<br />
 			<label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Height' , 'newpost-catch'); ?></label>
-			<input id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="text" style="width:30px;" value="<?php echo esc_attr($instance['height']); ?>" /> px
+			<input id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="text" style="width:50px;" value="<?php echo esc_attr($instance['height']); ?>" /> px
 			</p>
 			<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Show post(s)' , 'newpost-catch'); ?></label>
@@ -212,11 +215,31 @@ $thumb_url = $thumb_url[0];
 			<p>
 	                <input type="checkbox" class="checkbox" <?php if($instance['css']['active']){ echo 'checked="checked"'; } else { echo ''; } ?> id="<?php echo $this->get_field_id( 'css' ); ?>" name="<?php echo $this->get_field_name( 'css' ); ?>" /> <label for="<?php echo $this->get_field_id( 'css' ); ?>"><?php _e('Use default css', 'newpost-catch'); ?></label>
 			</p>
+			<?php _e('Post types' , 'newpost-catch'); ?><br />
+<?php
+	$args = array(
+		'public'   => true,
+	);
+
+	$output = 'objects';
+	$operator = 'and';
+
+	$post_types = get_post_types( $args, $output, $operator );
+	foreach ( $post_types as $post_type ) {
+		if( $post_type->name !== 'attachment' ){
+?>
+   <p><input type="radio" id="<?php echo $this->get_field_name($post_type->name); ?>" name="<?php echo $this->get_field_name('post_type'); ?>" value="<?php echo $post_type->name; ?>" <?php echo ( $instance['post_type'] == $post_type->name ) ? 'checked="checked"' : ''; ?> > <label for="<?php echo $this->get_field_name($post_type->name); ?>"><?php echo $post_type->labels->singular_name . '(' . $post_type->name . ')'; ?></label></p>
+<?php
+		}
+	}
+?>
+<?php if( $instance['post_type'] == 'post' ){ ?>
 			<p>
 			<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Display category(ies)' , 'newpost-catch'); ?></label>
 			<input id="<?php echo $this->get_field_id('cat'); ?>" name="<?php echo $this->get_field_name('cat'); ?>" type="text" class="widefat" value="<?php echo esc_attr($instance['cat']); ?>" />
 			<span><a href="<?php echo get_bloginfo('url') . '/wp-admin/edit-tags.php?taxonomy=category'; ?>"><?php _e('Check the category ID' , 'newpost-catch'); ?></a></span>
 			</p>
+<?php } ?>
 			<p>
 				<?php _e('Use shortcode' , 'newpost-catch'); ?>
 				<?php _e('Can use the shortcode in a textwidget and theme files.' , 'newpost-catch'); ?> <a href="http://wordpress.org/plugins/newpost-catch/faq/" target="_blank">FAQ</a>
@@ -257,6 +280,7 @@ if ( !class_exists('NewpostCatch_SC') ) {
 			/** default value **/
 			extract( shortcode_atts( array(
 				'id' => "npcatch",
+				'post_type' => "post",
 				'cat' => NULL,
 				'width' => 10,
 				'height' => 10,
@@ -287,6 +311,7 @@ if ( !class_exists('NewpostCatch_SC') ) {
 
 			/** query **/
 			$npc_sc_query = new WP_Query( array(
+				'post_type' => $post_type,
 				'cat' => $cat,
 				'offset' => $offset,
 				'posts_per_page' => $posts_per_page,

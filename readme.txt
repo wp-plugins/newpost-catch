@@ -4,7 +4,7 @@ Donate link: http://www.imamura.biz/blog/newpost-catch
 Tags: widget, plugin, posts, sidebar, image, images, thumb, thumbnail
 Requires at least: 3.3.1
 Tested up to: 4.0
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 
 Thumbnails in new articles setting widget.
 
@@ -62,6 +62,7 @@ Can use the shortcode in a textwidget and theme files.
 #### **parameter**
 
 * **id**(string) - Name of the id attribute "ul" element(default:npcatch)
+* **post_type**(string) - Use post types. Retrieves posts by Post Types(default:post)
 * **cat**(int) - Use category id(default:NULL)
 * **width**(int) - Thumbnail width px(default:10)
 * **height**(int) - Thumbnail height px(default:10)
@@ -91,6 +92,9 @@ When the post other than, post_type of the current page is the value of the prio
 3. Is simple to add the side bar, to set the size of the thumbnail, posts, post date
 
 == Changelog ==
+
+= 1.2.5 =
+* Use post types. Retrieves posts by Post Types.
 
 = 1.2.4 =
 * Compatibility check with WP 4.0.
