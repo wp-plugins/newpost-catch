@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.2.5";
+		var $version = "1.2.6";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -67,7 +67,11 @@ if ( !class_exists('NewpostCatch') ) {
 			$ignore 	= apply_filters('NewpostCatch_widget_ignore', $instance['ignore_check']['active']);
 			$css		= apply_filters('NewpostCatch_widget_css', $instance['css']);
 			$cat		= apply_filters('NewpostCatch_widget_cat', $instance['cat']);
-			$post_type	= apply_filters('NewpostCatch_widget_post_type', $instance['post_type']);
+			if( !empty($instance['post_type']) ){
+				$post_type	= apply_filters('NewpostCatch_widget_post_type', $instance['post_type']);
+			} else {
+				$post_type	= apply_filters('NewpostCatch_widget_post_type', 'post');
+			}
 /*			if( $instance['ignore_check']['active'] = !false  ) { $ignore = 1; } else { $ignore = 0; }*/
 
 			if( !function_exists('no_thumb_image') ){
