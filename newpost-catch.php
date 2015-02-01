@@ -3,7 +3,7 @@
 Plugin Name: Newpost Catch
 Plugin URI: http://www.imamura.biz/blog/newpost-catch/
 Description: Thumbnails in new articles setting widget.
-Version: 1.2.6
+Version: 1.2.7
 Author: Tetsuya Imamura
 Text Domain: newpost-catch
 Author URI: http://www.imamura.biz/blog/
@@ -32,7 +32,7 @@ function npc_options_page() {
 	require('npc_admin.php');
 }
 
-/*  Copyright 2012-2014 Tetsuya Imamura (@s56bouya)
+/*  Copyright 2012-2015 Tetsuya Imamura (@s56bouya)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as

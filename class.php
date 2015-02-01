@@ -5,7 +5,7 @@
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
 		/*** variables ***/
-		var $version = "1.2.6";
+		var $version = "1.2.7";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -26,10 +26,10 @@ if ( !class_exists('NewpostCatch') ) {
 			$this->charset = get_bloginfo('charset');
 
 			/** print stylesheet **/
-			add_action( 'wp_head', array(&$this, 'NewpostCatch_print_stylesheet') );
+			add_action( 'get_header', array( &$this, 'enqueue_stylesheet' ) );
 
 			/** activate textdomain for translations **/
-			add_action( 'init', array(&$this, 'NewpostCatch_textdomain') );
+			add_action( 'init', array( &$this, 'NewpostCatch_textdomain') );
 		}
 
 		/** plugin localization **/
@@ -37,8 +37,8 @@ if ( !class_exists('NewpostCatch') ) {
 			load_plugin_textdomain ( 'newpost-catch', false, basename( rtrim(dirname(__FILE__), '/') ) . '/languages' );
 		}
 
-		/** plugin insert header stylesheet **/
-		function NewpostCatch_print_stylesheet() {
+		/** plugin enqueue_stylesheet **/
+		function enqueue_stylesheet() {
 			if( get_option( 'widget_newpostcatch' ) ){
 				$options = array_filter( get_option( 'widget_newpostcatch' ) );
 				unset( $options['_multiwidget'] );
@@ -46,14 +46,15 @@ if ( !class_exists('NewpostCatch') ) {
 					$options[$key] = $val['css']['active'];
 				}
 				if( in_array('on' , $options) ){
-					$css_path = plugin_dir_url( __FILE__ ) . 'style.css';
+					$css_path = plugins_url('newpost-catch/style.css');
 				} else {
-					$css_path = ( @file_exists(STYLESHEETPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri().'/css/newpost-catch.css' : "" ;
-				}
-				if( $css_path ){
-					echo "\n"."<!-- Newpost Catch ver".$this->version." -->"."\n".'<link rel="stylesheet" href="' . $css_path . '" type="text/css" media="screen" />'."\n"."<!-- End Newpost Catch ver".$this->version." -->"."\n";
+					$css_path = ( @file_exists(STYLESHEETPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri() . '/css/newpost-catch.css' : "" ;
 				}
 			}
+
+			// register CSS
+			wp_register_style( 'newpost-catch', $css_path, array(), $this->version );
+			wp_enqueue_style( 'newpost-catch' );
 		}
 
 		/**▼ create widget ▼**/
