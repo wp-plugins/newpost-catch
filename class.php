@@ -50,11 +50,11 @@ if ( !class_exists('NewpostCatch') ) {
 				} else {
 					$css_path = ( @file_exists(STYLESHEETPATH.'/css/newpost-catch.css') ) ? get_stylesheet_directory_uri() . '/css/newpost-catch.css' : "" ;
 				}
-			}
 
-			// register CSS
-			wp_register_style( 'newpost-catch', $css_path, array(), $this->version );
-			wp_enqueue_style( 'newpost-catch' );
+				// register CSS
+				wp_register_style( 'newpost-catch', $css_path, array(), $this->version );
+				wp_enqueue_style( 'newpost-catch' );
+			}
 		}
 
 		/**▼ create widget ▼**/
