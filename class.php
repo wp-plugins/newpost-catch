@@ -4,8 +4,9 @@
  **/
 if ( !class_exists('NewpostCatch') ) {
 	class NewpostCatch extends WP_Widget {
+
 		/*** variables ***/
-		var $version = "1.2.7";
+		var $version = "1.2.8";
 		var $pluginDir = "";
 
 		/*** structure ***/
@@ -14,7 +15,7 @@ if ( !class_exists('NewpostCatch') ) {
 			$widget_ops = array( 'description' => 'Thumbnails in new articles.' );
 
 			/** widget actual processes **/
-			parent::WP_Widget(false, $name = 'Newpost Catch', $widget_ops );
+			parent::__construct(false, $name = 'Newpost Catch', $widget_ops );
 
 			/** plugin path **/
 			if (empty($this->pluginDir)) $this->pluginDir = WP_PLUGIN_URL . '/newpost-catch';
